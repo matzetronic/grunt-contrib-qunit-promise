@@ -5,15 +5,29 @@
 	<title>Test Suite</title>
 	<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
 
-	<script src="../node_modules/qunitjs/qunit/qunit.js"></script>
 	<script type="text/javascript">
 		if (!window.Promise) {
 			document.write('<script src="../node_modules/es6-promise/dist/es6-promise.js"><\/script>');
 		}
 	</script>
-	<script src="test.js"></script>
-</head>
-<body id="body">
-<div id="qunit"></div>
+	</head>
+	<body id="body">
+	<div id="qunit"></div>
+
+	<script src="../../node_modules/requirejs/require.js"></script>
+	<script>
+
+	require.config({
+		paths: {
+			qunitjs: "../../node_modules/qunitjs/qunit/qunit",
+			tests: "./test"
+		}
+	});
+
+	require( [ "qunitjs", "tests" ], function( QUnit, tests ) {
+		tests();
+		QUnit.start();
+	} );
+	</script>
 </body>
 </html>
